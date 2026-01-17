@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Shokha 🤍</title>
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+/* Gift box button with flip effect */
+.gift {
+    font-size: 90px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    animation: bounce 2s infinite;
+    z-index: 3;
+    transform-origin: bottom;
+}
+
+@keyframes bounce {
+    0%,100% { transform: translateY(0) rotateX(0deg); }
+    25% { transform: translateY(-20px) rotateX(10deg); }
+    50% { transform: translateY(0) rotateX(0deg); }
+    75% { transform: translateY(-10px) rotateX(-10deg); }
+}
+
+/* Birthday card */
+.card {
+    display: none;
+    background: white;
+    padding: 45px 55px;
+    border-radius: 25px;
+    box-shadow: 0 25px 45px rgba(0,0,0,0.25);
+    text-align: center;
+    animation: fadeIn 2s ease forwards;
+    z-index: 2;
+    position: relative;
+}
+
+h1 {
+    color: #ff4d6d;
+    margin-bottom: 15px;
+    font-size: 2.8em;
+}
+
+p {
+    color: #333;
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Floating items */
+.float {
+    position: absolute;
+    bottom: -60px;
+    font-size: 30px;
+    animation: rise 7s linear infinite;
+    opacity: 0.9;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes rise {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    10% { opacity: 1; }
+    50% { transform: translateY(-50vh) scale(1.2) rotate(15deg); }
+    100% { transform: translateY(-110vh) scale(1.5) rotate(-15deg); opacity: 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sparkle effect on card */
+@keyframes sparkle {
+    0%,100% { text-shadow: 0 0 5px #fff; }
+    50% { text-shadow: 0 0 20px #fff; }
+}
+
+.card h1 {
+    animation: sparkle 1.5s infinite;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Gift box -->
+<button class="gift" id="gift" aria-label="Open gift">🎁</button>
+
+<!-- Birthday card -->
+<div class="card" id="card">
+    <h1>Happy Birthday 🎂🤍</h1>
+    <p>
+        My beautiful <strong>Shokha</strong>,<br><br>
+        Today is all about you.<br>
+        Your smile, your heart,<br>
+        and the light you bring into my life.<br><br>
+        May this year bring happiness,<br>
+        peace, and everything your heart deserves 🌸<br><br>
+        I’m so grateful for you.<br>
+        Happy Birthday, my love ❤️
+    </p>
+</div>
+
+<!-- 🎵 Background music -->
+<audio id="music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c1b1fbc0c.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Floating items
+const items = ["🎂","🎉","🎈","🌸","🌹","💐","❤️","🎁","🌷"];
+
+function createItem() {
+    const el = document.createElement("div");
+    el.className = "float";
+    el.innerHTML = items[Math.floor(Math.random() * items.length)];
+    el.style.left = (50 + Math.sin(Math.random()*Math.PI*2)*30) + "vw"; // heart-like pattern
+    el.style.animationDuration = (5 + Math.random() * 4) + "s";
+    el.style.fontSize = (20 + Math.random() * 20) + "px";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 9000);
+}
+
+// Gift click event
+document.getElementById("gift").addEventListener("click", () => {
+    document.getElementById("gift").style.display = "none";
+    document.getElementById("card").style.display = "block";
+    document.getElementById("music").play(); // start music
+    setInterval(createItem, 300); // more frequent items
+});
+</script>
+
+</body>
+</html>
